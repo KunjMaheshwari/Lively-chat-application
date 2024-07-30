@@ -10,7 +10,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://lively-frontend-delta.vercel.app/",
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type"],
     credentials: true
@@ -19,7 +19,7 @@ const io = socketio(server, {
 
 // Apply the CORS middleware
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'https://lively-frontend-delta.vercel.app/',
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
   credentials: true
