@@ -1,4 +1,3 @@
-const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 const cors = require('cors');
@@ -7,25 +6,23 @@ const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 const router = require('./router');
 
 const app = express();
-const server = http.createServer(app);
+const server = require('http').createServer(app);
 const io = socketio(server, {
   cors: {
-    origin: "https://lively-frontend-delta.vercel.app/",
+    origin: ["http://localhost:3000"],
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type"],
     credentials: true
   }
 });
 
-// Apply the CORS middleware
-const corsOptions = {
-  origin: 'https://lively-frontend-delta.vercel.app/',
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type'],
+app.use(cors({
+  origin: ["http://localhost:3000"],
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"],
   credentials: true
-};
+}));
 
-app.use(cors(corsOptions));
 app.use(router);
 
 io.on('connect', (socket) => {
